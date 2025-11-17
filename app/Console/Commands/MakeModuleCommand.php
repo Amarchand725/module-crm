@@ -223,7 +223,7 @@ class MakeModuleCommand extends Command
 
             public function edit(\$id)
             {
-                \${$variable} = \$this->{$variable}->showModel(\$id);
+                \${$variable} = \$this->{$variable}Repo->showModel(\$id);
                 return view('{$pluralRoute}.edit', compact('{$variable}'));
             }
 

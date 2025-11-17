@@ -41,7 +41,7 @@ class CampaignController extends Controller
 
     public function edit($id)
     {
-        $campaign = $this->campaign->showModel($id);
+        $campaign = $this->campaignRepo->showModel($id);
         return view('campaigns.edit', compact('campaign'));
     }
 
