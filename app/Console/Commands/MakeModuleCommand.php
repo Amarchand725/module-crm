@@ -156,7 +156,7 @@ class MakeModuleCommand extends Command
             {
                 Schema::create('{$table}', function (Blueprint \$table) {
                     {$columns}
-                    \$table->morphs('author');
+                    \$table->foreignId('author_id')->nullable()->constrained('users')->nullOnDelete();
                     \$table->softDeletes();
                     \$table->timestamps();
                 });

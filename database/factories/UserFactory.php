@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enum\GenderEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,12 +24,23 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $username = fake()->username();
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'status_id'    => 1,
+            'name'    => fake()->name(),
+            'username' => $username,
+            'email' =>  $username . "@mailinator.com",
+            'avatar_id'    => null,
+            'gender'    => fake()->randomElement(array_column(GenderEnum::cases(), 'value')),
+            'dob'   => fake()->date(),
+            'phone' => fake()->phoneNumber(),
+            'two_factor'    => null,
+            'notification'  => null,
+            'password'  => 'user@321',
             'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
+            'phone_verified_at' => now(),
+
         ];
     }
 

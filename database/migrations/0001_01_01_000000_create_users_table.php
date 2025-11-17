@@ -1,5 +1,7 @@
 <?php
 
+use App\Enum\GenderEnum;
+use App\Enum\NotificationTypeEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,12 +15,23 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->uuid()->unique()->index();
+            $table->unsignedBigInteger('status_id')->nullable()->constrained('statuses')->cascadeOnUpdate()->nullOnDelete();
+            $table->string('username')->unique()->nullable();
             $table->string('name');
             $table->string('email')->unique();
+            $table->unsignedBigInteger('avatar_id')->nullable()->constrained('attachments')->cascadeOnUpdate()->nullOnDelete();
+            $table->enum('gender', array_column(GenderEnum::cases(), 'value'))->nullable();
+            $table->date('dob')->nullable();
+            $table->string('phone', 20)->nullable();
+            $table->enum('two_factor', array_column(NotificationTypeEnum::cases(), 'value'))->nullable();
+            $table->enum('notification', array_column(NotificationTypeEnum::cases(), 'value'))->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('phone_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -7,6 +7,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "imagine/imagine": "^1.5",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "ramsey/uuid": "^4.9",
@@ -29,7 +30,12 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Helpers/system.php",
+            "app/Helpers/base.php",
+            "app/Helpers/constants.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
